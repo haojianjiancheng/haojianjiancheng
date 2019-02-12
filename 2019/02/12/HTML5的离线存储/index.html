@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>郝健程的博客 - 前端知识学习</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="本博客用来组织学到的前端知识,CSS 的性能优化样式文件放在文档头部根据浏览器工作过程，渲染是在加载完样式文件后开始的，所以样式文件放在头部可以减少页面空白时间。
+避免使用@import有两种加载css文件的方式，一种是link,"> 
+    <meta name="author" content="haojianjiancheng"> 
+    <link rel="alternative" href="atom.xml" title="郝健程的博客" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">HTML5的离线存储</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">HTML5的离线存储</h1>
+        <div class="stuff">
+            <span>二月 12, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h2 id="起源："><a href="#起源：" class="headerlink" title="起源："></a>起源：</h2><p>在HTML5之前的网页，必须有联网才能访问，这也是WEB的一个特色。这对于PC的时代影响不大，但到了移动移动互联网时代，设备不固定，而且依赖无线信号。网络的可靠性降低，很多因素会造成断网，这对于WEB的伤害很大。因此，HTML5离线存储（Cache Manifest）诞生。</p>
+<h2 id="什么是Cache-Manifest："><a href="#什么是Cache-Manifest：" class="headerlink" title="什么是Cache Manifest："></a>什么是Cache Manifest：</h2><ul>
+<li>manifest是一个后缀名为minifest的文件。文件中定义需要离线存储的文件。支持manifest的浏览器，会按照manifest文件的规则，将文件保存在本地，从而在没有网络链接的情况下，也能访问。</li>
+<li>当我们第一次配置manifest的文件后，再次访问网页，浏览器就会检测manifest文件是否有变动。如果变动就会把相应的更新下载，同时改变浏览器里的manifest文件。如果没有变动，就会把manifest文件返回。</li>
+</ul>
+<h2 id="Manifest的特点："><a href="#Manifest的特点：" class="headerlink" title="Manifest的特点："></a>Manifest的特点：</h2><ul>
+<li>离线浏览：用户可以在离线状态下浏览网站内容</li>
+<li>更快的速度：因为数据被存储在本地，所以速度更快。</li>
+<li>减轻服务器的负载：浏览器只会下载服务器上发生改变的资源。</li>
+</ul>
+<h2 id="Manifest的缺点："><a href="#Manifest的缺点：" class="headerlink" title="Manifest的缺点："></a>Manifest的缺点：</h2><ul>
+<li>更新完版本后， 必须刷新一次才会启动新版本。</li>
+<li>进入离线缓存页面，如果不更新版本，会将其当成静态页面不请求。</li>
+<li>无法进行灰度发布等策略。</li>
+<li>无法增量更新。</li>
+</ul>
+<h2 id="与传统浏览器缓存的区别："><a href="#与传统浏览器缓存的区别：" class="headerlink" title="与传统浏览器缓存的区别："></a>与传统浏览器缓存的区别：</h2><ul>
+<li>Manifest针对整个应用，浏览器缓存是单个文件</li>
+<li>Manifest断网依然可以打开页面，浏览器缓存不行。</li>
+<li>Manifest可以主动通知浏览器更新资源。</li>
+</ul>
+<h2 id="浏览器支持："><a href="#浏览器支持：" class="headerlink" title="浏览器支持："></a>浏览器支持：</h2><p>IE10+、Firefox3+、Safari4+、Opera10.6、Chrome、iOS3.2+、Android Webkit</p>
+<h2 id="如何使用："><a href="#如何使用：" class="headerlink" title="如何使用："></a>如何使用：</h2><p>HTML新增了一个manifest属性，可以用来指定当前页面的manifest文件。<br>创建一个和HTML同名的manifest文件，如index.html，那么就可以创建一个新的index.appcache的文件。<br>然后给index.html的<code>html</code>标签设置如下属性</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">'en'</span> <span class="attr">manifest</span> =<span class="string">'index.appcache'</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Manifest文件细则："><a href="#Manifest文件细则：" class="headerlink" title="Manifest文件细则："></a>Manifest文件细则：</h2><p>一个典型的manifest文件如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CACHE MANIFEST</span><br><span class="line">#version 1.3</span><br><span class="line"></span><br><span class="line">CACHE:</span><br><span class="line">    test.css</span><br><span class="line"></span><br><span class="line">NETWORK:</span><br><span class="line">    *</span><br></pre></td></tr></table></figure>
+<p>第一行<code>CACHE MANIFEST</code>为固定格式，必须写在前面。<br>后面以<code>#</code>开头的是注释，一般会在第二行写个版本号，用来在缓存的文件更新时，更改manifest的作用，可以是版本号，时间戳或者md5码等等。<br>manifest文件，基本规格分为三段： </p>
+<ul>
+<li><code>CACHE</code>(必须)——离线资源<br>  标出哪些文件需要缓存，可以是相对的路径，也可以是绝对路径。</li>
+<li><code>NETWORK</code>(可选)——联网资源<br>  不缓存的文件，离线不可用。可以用<code>*</code>来只是除了<code>CACHE</code>的文件，其他都需要联网。<br>  这里要注意的是，如果这里没有用<code>*</code>，而是用了具体的地址，那么只要不在<code>CACHE</code>和<code>NETWORK</code>的文件都报加载失败。即使联网了也一样。</li>
+<li><code>FALLBACK</code>（可选）——替代资源<br>  指定后备页面，当资源无法访问时，浏览器会使用该页面。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FALLBACK:</span><br><span class="line">/html5/ /404.html</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>第一个<code>url</code>表示资源，第二个表示后备页面。这两个<code>url</code>必须都是相对路径，并且与清单文件同源，可以使用通配符。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FALLBACK:</span><br><span class="line">*.html /404.html</span><br></pre></td></tr></table></figure></p>
+<p>用404.html代替所有html文件。</p>
+<h2 id="如何更新缓存："><a href="#如何更新缓存：" class="headerlink" title="如何更新缓存："></a>如何更新缓存：</h2><ul>
+<li>更新manifest文件<br>给manifest文件添加或删除文件，都会更新缓存<br>通过更改版本号，可以很好的更新manifest文件。</li>
+<li><p>通过JS操作</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.applicationCach.update();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>清除浏览器缓存<br>如果用户清除了浏览器缓存（手动或者自动）都会从新下载文件。</p>
+</li>
+</ul>
+<h2 id="相关JS-API："><a href="#相关JS-API：" class="headerlink" title="相关JS API："></a>相关JS API：</h2><p>核心是<code>applicationCache</code>对象，有个<code>status</code>属性：</p>
+<ul>
+<li>0 （UNCACHED）：无缓存，即没有与页面相关的应用缓存。</li>
+<li>1（IDLE）：闲置，即应用缓存未得到更新。</li>
+<li>2（CHECKING）：检查中，即应用缓存正在下载描述文件中指定的资源。</li>
+<li>3（DOWNLOADING）：下载中，即应用缓存正在下载描述中指定的资源。</li>
+<li>4（UPDATEREADY）：更新完成，所有资源都已经下载完毕。</li>
+<li>5（IDLE）：废弃，即应用缓存的描述文件已经不存在了，因此页面无法访问应用缓存。 </li>
+</ul>
+<h2 id="相关事件："><a href="#相关事件：" class="headerlink" title="相关事件："></a>相关事件：</h2><ul>
+<li><code>checking</code>：在浏览器应用缓存查找更新时触发。</li>
+<li><code>error</code>：在检查更新或下载资源期间发送错误时触发。</li>
+<li><code>noupdate</code>：在检查描述文件发现文件无变化时触发。</li>
+<li><code>downloading</code>：在开始下载应用缓存资源时触发。</li>
+<li><code>progress</code>：在文件下载应用缓存的过程中持续不断的下载地触发</li>
+<li><code>updateready</code>：在页面更新的应用缓存下载完毕触发。</li>
+<li><code>cached</code>：在应用缓存完整可用时触发。</li>
+</ul>
+<h2 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h2><ul>
+<li>浏览器对缓存数据的容量限制可能不一样（一些浏览器限制每个站点5MB）</li>
+<li>如果manifest文件，或者内部列举的某个文件不能正常下载，则整个更新过程失败。浏览器继续全部使用旧的缓存。</li>
+<li>引用manifest的html必须与manifest文件同源，在同一个域下。</li>
+<li><code>FALLBACK</code>中的资源必须和manifest文件同源。</li>
+<li>当一个资源被缓存后，该浏览器直接请求这个绝对路径也会访问缓存中的资源。</li>
+<li>站点中的其他页面即使没有设置manifest属性，请求的资源如果在缓存中，也从缓存中访问。</li>
+<li>当manifest文件发生改变时，资源请求本身也会触发更新。</li>
+<li>manifest文件需要配置正确的MIME-type，即 “text/cache-manifest”，必须在web服务器上进行配置。</li>
+<li>更新完版本后，必须刷新一遍页面才能启动新版本。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">applicationCache.addEventListener(<span class="string">'updateready'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line"><span class="keyword">if</span> (applicationCache.status == applicationCache.UPDATEREADY) &#123;</span><br><span class="line">    applicationCache.swapCache(); <span class="comment">//使用新版本资源</span></span><br><span class="line">    <span class="built_in">window</span>.location.reload(); <span class="comment">//刷新页面 </span></span><br><span class="line">&#125;</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title="0" data-url="http://link.hhtjim.com/163/5146554.mp3"></li>
+                    
+                        <li title="1" data-url="http://link.hhtjim.com/qq/001faIUs4M2zna.mp3"></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-ae="false" data-ci="" data-cs="" data-r="" data-o="" data-a="" data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
